@@ -78,3 +78,17 @@ function reduceFunction(num1, num2) {
 const arr4 = [1, 2, 3, 4, 5];
 let val = myReduce(arr4, reduceFunction);
 console.log("After reduce: ", val);
+
+// includes()
+function myIncludes(arr, value) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === value) {
+      return true;
+    }
+  }
+  return false;
+}
+
+const words = ["1bob", "gary", "cassie"];
+const isFound = myIncludes(words, "1bob");
+console.log(isFound);
