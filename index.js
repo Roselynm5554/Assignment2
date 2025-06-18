@@ -65,9 +65,9 @@ console.log(isEveryEven);
 // reduce()
 function myReduce(arr, callBackFunc) {
   let value = 0;
-  for (let i = 0; i < Math.ceil(arr.length / 2); i += 2) {
-    console.log("current value: " + arr[i] + " " + arr[i + 1]);
-    value += callBackFunc(arr[i], arr[i + 1] || 0);
+  for (let i = 0; i < arr.length; i++) {
+    //value += callBackFunc(arr[i], arr[i + 1] || 0);
+    value = value + callBackFunc(arr[i]);
   }
   return value;
 }
@@ -88,7 +88,81 @@ function myIncludes(arr, value) {
   }
   return false;
 }
-
 const words = ["1bob", "gary", "cassie"];
 const isFound = myIncludes(words, "1bob");
 console.log(isFound);
+
+//indexOf()
+function myIndexOf(array, element){
+  for(let i = 0; i < array.length; i++ ) {
+    if(array[i] === element)
+      return i;
+  } 
+}
+const nums = [1, 2 ,3, 4, 5];
+const element = 5;
+const index = myIndexOf(nums,element)
+
+function myPush(array, element) {
+  array[array.length] = element;
+  
+
+}
+const pushNum = [1, 2 ,3, 4, 5];
+const element1 = 6;
+myPush(pushNum, element1);
+console.log(pushNum);
+
+function myLastIndexOf(arr, target) {
+  let index = -1;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == target) {
+      index = i;
+    }
+  }
+  return index;
+}
+
+const arr5 = [4, 77, 34, 12, 22, 1, 22, 17, 19, 1, 99, 4];
+const index1 = myLastIndexOf(arr5, 1);
+console.log(index1);
+
+
+// Object.keys()
+function grabKeys(obj) {
+  const arr = [];
+  for (const prop in obj) {
+    arr.push(prop);
+  }
+  return arr;
+}
+const obj1 = {
+  name: "Bob",
+  age: 21,
+  address: "123 Avenue",
+};
+console.log(grabKeys(obj1));
+
+// Object.values()
+function grabValues(obj) {
+  const arr = [];
+  for (const prop in obj) {
+    arr.push(obj[prop]);
+  }
+  return arr;
+}
+const obj2 = {
+  name: "Bob",
+  age: 21,
+  address: "123 Avenue",
+};
+console.log(grabValues(obj2));
+
+
+
+
+
+
+
+
+
