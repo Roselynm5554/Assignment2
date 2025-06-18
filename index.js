@@ -1,38 +1,48 @@
+// Some global values
+function isEven(num) {
+  return num % 2 === 0;
+}
+const obj1 = {
+  name: "Bob",
+  age: 21,
+  address: "123 Avenue",
+};
+const arr1 = [1, 2, 3, 4, 5];
+
 // forEach
 function myEach(arr, callback) {
-  callback(arr);
-}
-
-function loop(arr) {
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
+    callback(arr[i]);
   }
 }
 
-let arr1 = [1, 2, 3, 4, 5];
-myEach(arr1, loop);
-
-arr1.forEach(function (number) {
-  console.log("ForEach: ", number, "\n");
+myEach(arr1, (num) => {
+  console.log(num);
 });
+
 // map()
+function myMap(arr, callback) {
+  const newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(callback(arr[i]));
+  }
+  return newArr;
+}
+
+console.log(myMap(arr1, (num) => num * 2));
 
 // filter()
-function callBackFunction(number) {
-  return number % 2 == 0;
-}
-function myFilter(arr, callBackFunc) {
-  const array = [];
+function myFilter(arr, callback) {
+  const newArr = [];
   for (let i = 0; i < arr.length; i++) {
-    if (callBackFunc(arr[i])) {
-      array.push(arr[i]);
+    if (callback(arr[i])) {
+      newArr.push(arr[i]);
     }
   }
-  return array;
+  return newArr;
 }
 
-let newArr = myFilter(arr1, callBackFunction);
-console.log("New array after filter: ", newArr);
+console.log("Filtered Array: ", myFilter(arr1, isEven));
 
 // some()
 function mySome(arr, callBackFunc) {
@@ -44,9 +54,8 @@ function mySome(arr, callBackFunc) {
   return false;
 }
 
-const arr2 = [1, 1, 1, 1, 1, 1];
-const containsEvenNums = mySome(arr2, callBackFunction);
-console.log(containsEvenNums);
+const arr3 = [1, 1, 1, 1, 1, 1];
+console.log(mySome(arr3, isEven));
 
 // every()
 function myEvery(arr, callBackFunc) {
@@ -58,26 +67,22 @@ function myEvery(arr, callBackFunc) {
   return true;
 }
 
-const arr3 = [2, 2, 2, 2, 2];
-const isEveryEven = myEvery(arr3, callBackFunction);
-console.log(isEveryEven);
+const arr4 = [2, 2, 2, 2, 2];
+console.log(myEvery(arr4, isEven));
 
 // reduce()
 function myReduce(arr, callBackFunc) {
-  let value = 0;
-  for (let i = 0; i < arr.length; i++) {
-    //value += callBackFunc(arr[i], arr[i + 1] || 0);
-    value = value + callBackFunc(arr[i]);
+  let sum = 0;
+  for (let i = 0; i < arr.length; i += 2) {
+    sum += callBackFunc(arr[i], arr[i + 1] || 0);
   }
-  return value;
+  return sum;
 }
 
 function reduceFunction(num1, num2) {
   return num1 + num2;
 }
-const arr4 = [1, 2, 3, 4, 5];
-let val = myReduce(arr4, reduceFunction);
-console.log("After reduce: ", val);
+console.log("Reduced Array: ", myReduce(arr1, reduceFunction));
 
 // includes()
 function myIncludes(arr, value) {
@@ -92,27 +97,26 @@ const words = ["1bob", "gary", "cassie"];
 const isFound = myIncludes(words, "1bob");
 console.log(isFound);
 
-//indexOf()
-function myIndexOf(array, element){
-  for(let i = 0; i < array.length; i++ ) {
-    if(array[i] === element)
-      return i;
-  } 
+// indexOf()
+function myIndexOf(array, element) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === element) return i;
+  }
 }
-const nums = [1, 2 ,3, 4, 5];
+const nums = [1, 2, 3, 4, 5];
 const element = 5;
-const index = myIndexOf(nums,element)
+const index = myIndexOf(nums, element);
 
+// myPush()
 function myPush(array, element) {
   array[array.length] = element;
-  
-
 }
-const pushNum = [1, 2 ,3, 4, 5];
+const pushNum = [1, 2, 3, 4, 5];
 const element1 = 6;
 myPush(pushNum, element1);
 console.log(pushNum);
 
+// myLastIndexOf()
 function myLastIndexOf(arr, target) {
   let index = -1;
   for (let i = 0; i < arr.length; i++) {
@@ -123,10 +127,9 @@ function myLastIndexOf(arr, target) {
   return index;
 }
 
-const arr5 = [4, 77, 34, 12, 22, 1, 22, 17, 19, 1, 99, 4];
-const index1 = myLastIndexOf(arr5, 1);
+const arr6 = [4, 77, 34, 12, 22, 1, 22, 17, 19, 1, 99, 4];
+const index1 = myLastIndexOf(arr6, 1);
 console.log(index1);
-
 
 // Object.keys()
 function grabKeys(obj) {
@@ -136,11 +139,6 @@ function grabKeys(obj) {
   }
   return arr;
 }
-const obj1 = {
-  name: "Bob",
-  age: 21,
-  address: "123 Avenue",
-};
 console.log(grabKeys(obj1));
 
 // Object.values()
@@ -151,18 +149,4 @@ function grabValues(obj) {
   }
   return arr;
 }
-const obj2 = {
-  name: "Bob",
-  age: 21,
-  address: "123 Avenue",
-};
-console.log(grabValues(obj2));
-
-
-
-
-
-
-
-
-
+console.log(grabValues(obj1));
